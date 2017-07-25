@@ -1,0 +1,23 @@
+version: "2"
+services:
+  genieacs-cwmp:
+    build: .
+    image: ebits/genieacs
+    command: genieacs-cwmp
+    ports:
+     - "7547:7547"
+     
+  genieacs-nbi:
+    build: .
+    image: ebits/genieacs
+    command: genieacs-nbi
+    ports:
+     - "7557:7557"
+
+  genieacs-fs:
+    build: .
+    image: ebits/genieacs
+    command: genieacs-fs
+    ports:
+     - "7567:7567"
+     
