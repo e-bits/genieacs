@@ -1,23 +1,46 @@
 version: "2"
 services:
-  genieacs-cwmp:
+  cwmp:
     build: .
     image: ebits/genieacs
-    command: genieacs-cwmp
+    command: ./bin/genieacs-cwmp
     ports:
      - "7547:7547"
+    links:
+     - "mongodb"
+     - "redis"
+    depends_on:
+     - "mongodb"
+     - "redis"
      
-  genieacs-nbi:
+  nbi:
     build: .
     image: ebits/genieacs
-    command: genieacs-nbi
+    command: ./bin/genieacs-nbi
     ports:
      - "7557:7557"
+    links:
+     - "mongodb"
+     - "redis"
+    depends_on:
+     - "mongodb"
+     - "redis"     
 
-  genieacs-fs:
+  fs:
     build: .
     image: ebits/genieacs
-    command: genieacs-fs
+    command: ./bin/genieacs-fs
     ports:
      - "7567:7567"
-     
+    links:
+     - "mongodb"
+     - "redis"
+    depends_on:
+     - "mongodb"
+     - "redis"
+
+  redis:
+    image: redis:alpine
+
+  mongodb:
+    image: mongo
